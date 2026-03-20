@@ -1,6 +1,14 @@
+import { useRef, useEffect } from 'react'
 import './SidebarCard.css'
 
-function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect }) {
+function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (isUser && scrollKey > 0 && ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [scrollKey, isUser])
   const handleClick = () => {
     if (isUser && !thumbnail) {
       const input = document.createElement('input')
@@ -16,7 +24,7 @@ function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFil
 
   if (isUser) {
     return (
-      <div className="sidebar-card user-card" onClick={handleClick}>
+      <div className="sidebar-card user-card" ref={ref} onClick={handleClick}>
         <div className="sidebar-thumb-wrapper">
           <div className="sidebar-thumb">
             {thumbnail ? (
@@ -41,8 +49,8 @@ function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFil
   return (
     <div className="sidebar-card">
       <div className="sidebar-thumb-wrapper">
-        <div className="sidebar-thumb fake-thumb" style={{ background: video.gradient }}>
-          <div className="fake-thumb-text-sm">{video.thumbTextSmall}</div>
+        <div className="sidebar-thumb">
+          <img src={`/thumbs/${video.id}.jpg`} alt={video.title} />
         </div>
         <span className="duration-badge-sm">{video.duration}</span>
       </div>

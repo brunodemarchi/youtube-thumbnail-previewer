@@ -1,6 +1,15 @@
+import { useRef, useEffect } from 'react'
+import { avatarColor } from '../avatarColor'
 import './VideoCard.css'
 
-function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect }) {
+function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (isUser && scrollKey > 0 && ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [scrollKey, isUser])
   const handleClick = () => {
     if (isUser && !thumbnail) {
       const input = document.createElement('input')
@@ -16,7 +25,7 @@ function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileS
 
   if (isUser) {
     return (
-      <div className="video-card user-card" onClick={handleClick}>
+      <div className="video-card user-card" ref={ref} onClick={handleClick}>
         <div className="thumbnail-wrapper">
           <div className="thumbnail">
             {thumbnail ? (
@@ -46,14 +55,14 @@ function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileS
   return (
     <div className="video-card">
       <div className="thumbnail-wrapper">
-        <div className="thumbnail fake-thumb" style={{ background: video.gradient }}>
-          <div className="fake-thumb-text">{video.thumbText}</div>
+        <div className="thumbnail">
+          <img src={`/thumbs/${video.id}.jpg`} alt={video.title} />
         </div>
         <span className="duration-badge">{video.duration}</span>
       </div>
       <div className="video-info">
-        <div className="channel-avatar" style={{ background: video.color }}>
-          {video.avatar}
+        <div className="channel-avatar" style={{ background: avatarColor(video.channel) }}>
+          {video.channel[0].toUpperCase()}
         </div>
         <div className="video-meta">
           <h3 className="video-title">{video.title}</h3>

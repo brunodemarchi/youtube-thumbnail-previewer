@@ -1,0 +1,35 @@
+.yt-search-view {
+  padding: 120px 24px 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.search-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #272727;
+  color: #f1f1f1;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.filter-chip:hover { background: #3a3a3a; }
+.filter-chip.active {
+  background: #f1f1f1;
+  color: #0f0f0f;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,8 +1,28 @@
 import SidebarCard from './SidebarCard'
-import fakeVideos from '../fakeVideos'
 import './SidebarView.css'
 
-function SidebarView({ thumbnail, title, duration, channel, onFileSelect }) {
+function SidebarView({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey }) {
+  const userCard = (
+    <SidebarCard
+      key="user"
+      isUser
+      thumbnail={thumbnail}
+      title={title}
+      duration={duration}
+      channel={channel}
+      onFileSelect={onFileSelect}
+      scrollKey={scrollKey}
+    />
+  )
+
+  const fakeCards = videos.map((video, i) => (
+    <SidebarCard key={video.id + '-' + i} video={video} />
+  ))
+
+  const pos = Math.min(userPosition, fakeCards.length)
+  const allCards = [...fakeCards]
+  allCards.splice(pos, 0, userCard)
+
   return (
     <main className="yt-sidebar-view">
       <div className="sidebar-layout">
@@ -27,17 +47,7 @@ function SidebarView({ thumbnail, title, duration, channel, onFileSelect }) {
 
         <div className="sidebar-suggestions">
           <h3 className="sidebar-heading">Up next</h3>
-          <SidebarCard
-            isUser
-            thumbnail={thumbnail}
-            title={title}
-            duration={duration}
-            channel={channel}
-            onFileSelect={onFileSelect}
-          />
-          {fakeVideos.map((video) => (
-            <SidebarCard key={video.id} video={video} />
-          ))}
+          {allCards}
         </div>
       </div>
     </main>

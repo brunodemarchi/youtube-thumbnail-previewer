@@ -2,11 +2,7 @@
   cursor: pointer;
 }
 
-.video-card.user-card {
-  outline: 2px solid #3ea6ff;
-  outline-offset: 4px;
-  border-radius: 12px;
-}
+.video-card.user-card {}
 
 .thumbnail-wrapper {
   position: relative;

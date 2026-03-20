@@ -1,6 +1,8 @@
+import { useMemo } from 'react'
 import './Header.css'
 
 function Header() {
+  const initial = useMemo(() => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)], [])
   return (
     <header className="yt-header">
       <div className="header-left">
@@ -28,7 +30,7 @@ function Header() {
         </div>
       </div>
       <div className="header-right">
-        <div className="avatar">B</div>
+        <div className="avatar">{initial}</div>
       </div>
     </header>
   )

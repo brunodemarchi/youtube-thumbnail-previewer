@@ -8,11 +8,7 @@
 }
 .sidebar-card:hover { background: #1a1a1a; }
 
-.sidebar-card.user-card {
-  outline: 2px solid #3ea6ff;
-  outline-offset: 2px;
-  border-radius: 8px;
-}
+.sidebar-card.user-card {}
 
 .sidebar-thumb-wrapper {
   position: relative;
