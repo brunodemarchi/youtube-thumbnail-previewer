@@ -2,6 +2,8 @@
 
 Preview how your YouTube thumbnail looks in context — alongside real video thumbnails in YouTube's actual UI layouts.
 
+![Preview](public/preview.png)
+
 ## Features
 
 - **Three preview modes**: Home Grid, Sidebar (Up Next), and Search Results
@@ -13,6 +15,8 @@ Preview how your YouTube thumbnail looks in context — alongside real video thu
 - **Fully local**: no backend, no data sent anywhere
 
 ## Getting Started
+
+Requires **Node.js 18+**.
 
 ```bash
 npm install
