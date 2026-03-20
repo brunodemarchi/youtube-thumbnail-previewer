@@ -1,0 +1,33 @@
+/* ─── Tabs ─── */
+.yt-tabs {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: #0f0f0f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px;
+  z-index: 99;
+  border-bottom: 1px solid #272727;
+}
+
+.tab {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #272727;
+  color: #f1f1f1;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.tab:hover { background: #3a3a3a; }
+.tab.active {
+  background: #f1f1f1;
+  color: #0f0f0f;
+}

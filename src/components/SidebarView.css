@@ -1,0 +1,71 @@
+.yt-sidebar-view {
+  padding: 120px 24px 40px;
+}
+
+.sidebar-layout {
+  display: flex;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.player-area {
+  flex: 1;
+  min-width: 0;
+}
+
+.player-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #1a1a1a;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-info { padding: 16px 0; }
+
+.player-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.player-stats {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.player-channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sub-count {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.sidebar-suggestions {
+  width: 400px;
+  min-width: 400px;
+}
+
+.sidebar-heading {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+  .sidebar-layout {
+    flex-direction: column;
+  }
+  .sidebar-suggestions {
+    width: 100%;
+    min-width: 0;
+  }
+}

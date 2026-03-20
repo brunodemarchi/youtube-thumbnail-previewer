@@ -1,0 +1,17 @@
+.drop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-message {
+  font-size: 28px;
+  color: #3ea6ff;
+  border: 3px dashed #3ea6ff;
+  padding: 60px 80px;
+  border-radius: 16px;
+}
