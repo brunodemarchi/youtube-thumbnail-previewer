@@ -4,13 +4,13 @@
   left: 0;
   right: 0;
   height: 56px;
-  background: #0f0f0f;
+  background: var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
   z-index: 100;
-  border-bottom: 1px solid #272727;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .header-left {
@@ -22,12 +22,12 @@
 .menu-btn {
   background: none;
   border: none;
-  color: #f1f1f1;
+  color: var(--text-primary);
   cursor: pointer;
   padding: 8px;
   border-radius: 50%;
 }
-.menu-btn:hover { background: #272727; }
+.menu-btn:hover { background: var(--bg-elevated); }
 
 .yt-logo { display: flex; align-items: center; }
 
@@ -41,11 +41,11 @@
 .search-bar input {
   flex: 1;
   height: 40px;
-  background: #121212;
-  border: 1px solid #303030;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
   border-right: none;
   border-radius: 40px 0 0 40px;
-  color: #f1f1f1;
+  color: var(--text-primary);
   padding: 0 16px;
   font-size: 16px;
   outline: none;
@@ -55,30 +55,47 @@
 .search-btn {
   width: 64px;
   height: 40px;
-  background: #222;
-  border: 1px solid #303030;
+  background: var(--bg-search-btn);
+  border: 1px solid var(--border-input);
   border-radius: 0 40px 40px 0;
-  color: #f1f1f1;
+  color: var(--text-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.header-right { display: flex; align-items: center; }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #3ea6ff;
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 500;
   font-size: 14px;
-  color: #0f0f0f;
+  color: #fff;
 }
+
+.theme-toggle {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-input);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+}
+.theme-toggle:hover { background: var(--bg-hover); }
 
 @media (max-width: 600px) {
   .header-center { display: none; }

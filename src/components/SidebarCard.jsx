@@ -50,7 +50,7 @@ function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFil
     <div className="sidebar-card">
       <div className="sidebar-thumb-wrapper">
         <div className="sidebar-thumb">
-          <img src={`/thumbs/${video.id}.jpg`} alt={video.title} />
+          <img src={`${import.meta.env.BASE_URL}thumbs/${video.id}.jpg`} alt={video.title} />
         </div>
         <span className="duration-badge-sm">{video.duration}</span>
       </div>

@@ -1,7 +1,7 @@
 .drop-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--overlay-bg);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -10,8 +10,8 @@
 
 .drop-message {
   font-size: 28px;
-  color: #3ea6ff;
-  border: 3px dashed #3ea6ff;
+  color: var(--accent);
+  border: 3px dashed var(--accent);
   padding: 60px 80px;
   border-radius: 16px;
 }

@@ -17,11 +17,15 @@
 .player-placeholder {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #1a1a1a;
+  background: var(--bg-secondary);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.player-placeholder svg path {
+  fill: var(--text-secondary);
 }
 
 .player-info { padding: 16px 0; }
@@ -34,7 +38,7 @@
 
 .player-stats {
   font-size: 14px;
-  color: #aaa;
+  color: var(--text-secondary);
   margin-bottom: 12px;
 }
 
@@ -46,7 +50,7 @@
 
 .sub-count {
   font-size: 12px;
-  color: #aaa;
+  color: var(--text-secondary);
 }
 
 .sidebar-suggestions {

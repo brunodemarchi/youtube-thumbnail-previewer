@@ -56,7 +56,7 @@ function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileS
     <div className="video-card">
       <div className="thumbnail-wrapper">
         <div className="thumbnail">
-          <img src={`/thumbs/${video.id}.jpg`} alt={video.title} />
+          <img src={`${import.meta.env.BASE_URL}thumbs/${video.id}.jpg`} alt={video.title} />
         </div>
         <span className="duration-badge">{video.duration}</span>
       </div>

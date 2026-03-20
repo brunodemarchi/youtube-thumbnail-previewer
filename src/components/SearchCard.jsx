@@ -60,7 +60,7 @@ function SearchCard({ video, isUser, thumbnail, title, duration, channel, onFile
     <div className="search-card">
       <div className="search-thumb-wrapper">
         <div className="search-thumb">
-          <img src={`/thumbs/${video.id}.jpg`} alt={video.title} />
+          <img src={`${import.meta.env.BASE_URL}thumbs/${video.id}.jpg`} alt={video.title} />
         </div>
         <span className="search-duration">{video.duration}</span>
       </div>

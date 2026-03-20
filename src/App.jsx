@@ -51,6 +51,16 @@ function App() {
   const [seed, setSeed] = useState(0)
   const [userPosition, setUserPosition] = useState(0)
   const [scrollKey, setScrollKey] = useState(0)
+  const [theme, setTheme] = useState(saved.theme || 'dark')
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => t === 'dark' ? 'light' : 'dark')
+  }, [])
 
   const displayTitle = title || 'Your Video Title Goes Here'
   const displayDuration = duration || '12:34'
@@ -58,9 +68,9 @@ function App() {
 
   // Persist to localStorage
   useEffect(() => {
-    const data = { title, duration, channel, thumbnail }
+    const data = { title, duration, channel, thumbnail, theme }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-  }, [title, duration, channel, thumbnail])
+  }, [title, duration, channel, thumbnail, theme])
 
   // Pick random videos whenever seed changes
   const { homeVideos, sidebarVideos, searchVideos } = useMemo(() => {
@@ -103,6 +113,18 @@ function App() {
   const handleClear = useCallback(() => {
     setThumbnail(null)
   }, [])
+
+  // Keyboard shortcuts (R = shuffle, when not typing)
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
+      if (e.key === 'r' || e.key === 'R') {
+        handleShuffleAll()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [handleShuffleAll])
 
   // Global paste handler
   useEffect(() => {
@@ -163,7 +185,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header theme={theme} onToggleTheme={toggleTheme} />
       <nav className="yt-tabs">
         <button
           className={`tab ${view === 'home' ? 'active' : ''}`}

@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
 import './Header.css'
 
-function Header() {
+function Header({ theme, onToggleTheme }) {
   const initial = useMemo(() => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)], [])
+  const logoTextFill = theme === 'light' ? '#0f0f0f' : 'white'
+
   return (
     <header className="yt-header">
       <div className="header-left">
@@ -15,7 +17,7 @@ function Header() {
           <svg viewBox="0 0 90 20" width="90" height="20">
             <path fill="#ff0000" d="M27.97 3.12a3.02 3.02 0 0 0-2.12-2.13C23.73.5 14.6.5 14.6.5S5.47.5 3.35.99A3.02 3.02 0 0 0 1.23 3.12C.74 5.24.74 10 .74 10s0 4.76.49 6.88a3.02 3.02 0 0 0 2.12 2.13c2.12.49 11.25.49 11.25.49s9.13 0 11.25-.49a3.02 3.02 0 0 0 2.12-2.13c.49-2.12.49-6.88.49-6.88s0-4.76-.49-6.88z" />
             <path fill="#fff" d="M11.74 14.26L19.2 10l-7.46-4.26z" />
-            <text x="32" y="15" fill="white" fontFamily="Roboto, Arial, sans-serif" fontSize="14" fontWeight="bold">YouTube</text>
+            <text x="32" y="15" fill={logoTextFill} fontFamily="Roboto, Arial, sans-serif" fontSize="14" fontWeight="bold">YouTube</text>
           </svg>
         </div>
       </div>
@@ -30,6 +32,9 @@ function Header() {
         </div>
       </div>
       <div className="header-right">
+        <button className="theme-toggle" onClick={onToggleTheme}>
+          {theme === 'dark' ? 'Enter Light Mode' : 'Enter Dark Mode'}
+        </button>
         <div className="avatar">{initial}</div>
       </div>
     </header>
