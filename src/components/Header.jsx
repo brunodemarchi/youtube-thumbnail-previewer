@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import './Header.css'
 
-function Header({ theme, onToggleTheme }) {
+function Header({ theme, onToggleTheme, onOpenSettings }) {
   const initial = useMemo(() => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)], [])
   const logoTextFill = theme === 'light' ? '#0f0f0f' : 'white'
 
@@ -32,6 +32,11 @@ function Header({ theme, onToggleTheme }) {
         </div>
       </div>
       <div className="header-right">
+        <button className="settings-btn" aria-label="Settings" title="Settings" onClick={onOpenSettings}>
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M19.14 12.94a7.79 7.79 0 0 0 .05-.94 7.79 7.79 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.03 7.03 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.59.24-1.13.55-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.66 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.05.62-.05.94s.01.63.05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.14.24.43.34.69.22l2.39-.96c.49.39 1.03.7 1.62.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.59-.24 1.13-.55 1.62-.94l2.39.96c.26.12.55.02.69-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" />
+          </svg>
+        </button>
         <button className="theme-toggle" onClick={onToggleTheme}>
           {theme === 'dark' ? 'Enter Light Mode' : 'Enter Dark Mode'}
         </button>

@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { avatarColor } from '../avatarColor'
 import './VideoCard.css'
 
-function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey }) {
+function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey, onContextMenu }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function VideoCard({ video, isUser, thumbnail, title, duration, channel, onFileS
   }
 
   return (
-    <div className="video-card">
+    <div className="video-card" onContextMenu={onContextMenu}>
       <div className="thumbnail-wrapper">
         <div className="thumbnail">
           <img src={`${import.meta.env.BASE_URL}thumbs/${video.id}.jpg`} alt={video.title} />

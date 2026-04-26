@@ -1,7 +1,7 @@
 import VideoCard from './VideoCard'
 import './HomeGrid.css'
 
-function HomeGrid({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey }) {
+function HomeGrid({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey, onPlaceAt }) {
   const userCard = (
     <VideoCard
       key="user"
@@ -15,9 +15,16 @@ function HomeGrid({ thumbnail, title, duration, channel, onFileSelect, videos, u
     />
   )
 
-  const fakeCards = videos.map((video, i) => (
-    <VideoCard key={video.id + '-' + i} video={video} />
-  ))
+  const fakeCards = videos.map((video, i) => {
+    const visualIndex = i < userPosition ? i : i + 1
+    return (
+      <VideoCard
+        key={video.id + '-' + i}
+        video={video}
+        onContextMenu={(e) => { e.preventDefault(); onPlaceAt(visualIndex) }}
+      />
+    )
+  })
 
   // Insert user card at the specified position
   const pos = Math.min(userPosition, fakeCards.length)

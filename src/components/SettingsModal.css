@@ -1,0 +1,101 @@
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+}
+
+.settings-panel {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.settings-close {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 6px;
+  border-radius: 6px;
+}
+.settings-close:hover { background: var(--bg-elevated); }
+
+.settings-intro {
+  margin: 4px 0 16px;
+  font-size: 13px;
+  color: var(--text-secondary, var(--text-primary));
+  opacity: 0.85;
+}
+
+.settings-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.settings-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-field-label {
+  font-size: 14px;
+}
+
+.settings-range {
+  opacity: 0.6;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.settings-field input[type="number"] {
+  width: 72px;
+  height: 32px;
+  padding: 0 8px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: right;
+  outline: none;
+}
+.settings-field input[type="number"]:focus { border-color: var(--accent, #3ea6ff); }
+
+.settings-tip {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 12px;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  opacity: 0.9;
+}

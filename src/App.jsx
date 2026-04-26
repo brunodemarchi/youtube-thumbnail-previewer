@@ -4,6 +4,7 @@ import EditorPanel from './components/EditorPanel'
 import HomeGrid from './components/HomeGrid'
 import SidebarView from './components/SidebarView'
 import SearchView from './components/SearchView'
+import SettingsModal from './components/SettingsModal'
 import DropOverlay from './components/DropOverlay'
 import videoDatabase from './videoDatabase'
 import './App.css'
@@ -21,14 +22,34 @@ const HOME_COUNT = 11
 const SIDEBAR_COUNT = 9
 const SEARCH_COUNT = 9
 
+const VIEW_COUNTS = { home: HOME_COUNT, sidebar: SIDEBAR_COUNT, search: SEARCH_COUNT }
+const DEFAULT_INITIAL_POSITION = { home: 5, sidebar: 4, search: 4 }
+
 const STORAGE_KEY = 'yt-thumb-previewer'
+
+function clampInt(v, max, fallback) {
+  return Number.isInteger(v) && v >= 0 && v <= max ? v : fallback
+}
+
+function sanitizeInitialPosition(raw) {
+  const ip = raw && typeof raw === 'object' ? raw : {}
+  return {
+    home: clampInt(ip.home, HOME_COUNT, DEFAULT_INITIAL_POSITION.home),
+    sidebar: clampInt(ip.sidebar, SIDEBAR_COUNT, DEFAULT_INITIAL_POSITION.sidebar),
+    search: clampInt(ip.search, SEARCH_COUNT, DEFAULT_INITIAL_POSITION.search),
+  }
+}
 
 function loadSaved() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) return JSON.parse(raw)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      parsed.initialPosition = sanitizeInitialPosition(parsed.initialPosition)
+      return parsed
+    }
   } catch {}
-  return {}
+  return { initialPosition: { ...DEFAULT_INITIAL_POSITION } }
 }
 
 function fileToDataURL(file) {
@@ -52,6 +73,8 @@ function App() {
   const [userPosition, setUserPosition] = useState(0)
   const [scrollKey, setScrollKey] = useState(0)
   const [theme, setTheme] = useState(saved.theme || 'dark')
+  const [initialPosition, setInitialPosition] = useState(saved.initialPosition || DEFAULT_INITIAL_POSITION)
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   // Apply theme to document
   useEffect(() => {
@@ -68,9 +91,9 @@ function App() {
 
   // Persist to localStorage
   useEffect(() => {
-    const data = { title, duration, channel, thumbnail, theme }
+    const data = { title, duration, channel, thumbnail, theme, initialPosition }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-  }, [title, duration, channel, thumbnail, theme])
+  }, [title, duration, channel, thumbnail, theme, initialPosition])
 
   // Pick random videos whenever seed changes
   const { homeVideos, sidebarVideos, searchVideos } = useMemo(() => {
@@ -103,12 +126,22 @@ function App() {
     setScrollKey((s) => s + 1)
   }, [getMaxPos])
 
+  const handlePlaceAtVisual = useCallback((visualIndex) => {
+    setUserPosition(visualIndex)
+    setScrollKey((s) => s + 1)
+  }, [])
+
   const handleImage = useCallback(async (file) => {
     if (file && file.type.startsWith('image/')) {
       const dataURL = await fileToDataURL(file)
+      const isFirst = !thumbnail
       setThumbnail(dataURL)
+      if (isFirst) {
+        setUserPosition(initialPosition[view] ?? 0)
+        setScrollKey((s) => s + 1)
+      }
     }
-  }, [])
+  }, [thumbnail, view, initialPosition])
 
   const handleClear = useCallback(() => {
     setThumbnail(null)
@@ -185,7 +218,7 @@ function App() {
 
   return (
     <>
-      <Header theme={theme} onToggleTheme={toggleTheme} />
+      <Header theme={theme} onToggleTheme={toggleTheme} onOpenSettings={() => setSettingsOpen(true)} />
       <nav className="yt-tabs">
         <button
           className={`tab ${view === 'home' ? 'active' : ''}`}
@@ -233,6 +266,7 @@ function App() {
           videos={homeVideos}
           userPosition={userPosition}
           scrollKey={scrollKey}
+          onPlaceAt={handlePlaceAtVisual}
         />
       )}
       {view === 'sidebar' && (
@@ -245,6 +279,7 @@ function App() {
           videos={sidebarVideos}
           userPosition={userPosition}
           scrollKey={scrollKey}
+          onPlaceAt={handlePlaceAtVisual}
         />
       )}
       {view === 'search' && (
@@ -257,8 +292,17 @@ function App() {
           videos={searchVideos}
           userPosition={userPosition}
           scrollKey={scrollKey}
+          onPlaceAt={handlePlaceAtVisual}
         />
       )}
+
+      <SettingsModal
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        initialPosition={initialPosition}
+        onChange={setInitialPosition}
+        viewCounts={VIEW_COUNTS}
+      />
     </>
   )
 }

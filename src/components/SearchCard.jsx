@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { avatarColor } from '../avatarColor'
 import './SearchCard.css'
 
-function SearchCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey }) {
+function SearchCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey, onContextMenu }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function SearchCard({ video, isUser, thumbnail, title, duration, channel, onFile
   }
 
   return (
-    <div className="search-card">
+    <div className="search-card" onContextMenu={onContextMenu}>
       <div className="search-thumb-wrapper">
         <div className="search-thumb">
           <img src={`${import.meta.env.BASE_URL}thumbs/${video.id}.jpg`} alt={video.title} />

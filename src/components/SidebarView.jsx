@@ -1,7 +1,7 @@
 import SidebarCard from './SidebarCard'
 import './SidebarView.css'
 
-function SidebarView({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey }) {
+function SidebarView({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey, onPlaceAt }) {
   const userCard = (
     <SidebarCard
       key="user"
@@ -15,9 +15,16 @@ function SidebarView({ thumbnail, title, duration, channel, onFileSelect, videos
     />
   )
 
-  const fakeCards = videos.map((video, i) => (
-    <SidebarCard key={video.id + '-' + i} video={video} />
-  ))
+  const fakeCards = videos.map((video, i) => {
+    const visualIndex = i < userPosition ? i : i + 1
+    return (
+      <SidebarCard
+        key={video.id + '-' + i}
+        video={video}
+        onContextMenu={(e) => { e.preventDefault(); onPlaceAt(visualIndex) }}
+      />
+    )
+  })
 
   const pos = Math.min(userPosition, fakeCards.length)
   const allCards = [...fakeCards]

@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import './SidebarCard.css'
 
-function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey }) {
+function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFileSelect, scrollKey, onContextMenu }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function SidebarCard({ video, isUser, thumbnail, title, duration, channel, onFil
   }
 
   return (
-    <div className="sidebar-card">
+    <div className="sidebar-card" onContextMenu={onContextMenu}>
       <div className="sidebar-thumb-wrapper">
         <div className="sidebar-thumb">
           <img src={`${import.meta.env.BASE_URL}thumbs/${video.id}.jpg`} alt={video.title} />

@@ -1,7 +1,7 @@
 import SearchCard from './SearchCard'
 import './SearchView.css'
 
-function SearchView({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey }) {
+function SearchView({ thumbnail, title, duration, channel, onFileSelect, videos, userPosition, scrollKey, onPlaceAt }) {
   const userCard = (
     <SearchCard
       key="user"
@@ -15,9 +15,16 @@ function SearchView({ thumbnail, title, duration, channel, onFileSelect, videos,
     />
   )
 
-  const fakeCards = videos.map((video, i) => (
-    <SearchCard key={video.id + '-' + i} video={video} />
-  ))
+  const fakeCards = videos.map((video, i) => {
+    const visualIndex = i < userPosition ? i : i + 1
+    return (
+      <SearchCard
+        key={video.id + '-' + i}
+        video={video}
+        onContextMenu={(e) => { e.preventDefault(); onPlaceAt(visualIndex) }}
+      />
+    )
+  })
 
   const pos = Math.min(userPosition, fakeCards.length)
   const allCards = [...fakeCards]
